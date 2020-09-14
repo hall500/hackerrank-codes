@@ -21,25 +21,17 @@ process.stdin.on('end', _ => {
 function readLine() {
     return inputString[currentLine++];
 }
-
 /*
- * Complete the vowelsAndConsonants function.
- * Print your output using 'console.log()'.
+ * Create the function factorial here
  */
-function vowelsAndConsonants(s) {
-     const vowels = s.replace(/[^aeiou]/g, '');
-     for(let i=0; i < vowels.length; i++){
-         console.log(vowels[i]);
-     }
-     const consonants = s.replace(/[aeiou]/g, '');
-     for(let i=0; i < consonants.length; i++){
-         console.log(consonants[i]);
-     }
+function factorial(n){
+    if(n == 1) return 1;
+    else return n * factorial(n - 1); 
 }
 
 
 function main() {
-    const s = readLine();
+    const n = +(readLine());
     
-    vowelsAndConsonants(s);
+    console.log(factorial(n));
 }
