@@ -34,15 +34,13 @@ $_fp = fopen("php://stdin", "r");
 fscanf($_fp, " %d", $n);
 $data = read_data($_fp);
 sort($data);
-print_r($data);
 $lower = lowerQuartile($data);
-print_r($lower);
 print(median($lower));
-/* print("\n");
+print("\n");
 print(median($data));
 print("\n");
 $upper = upperQuartile($data);
-print(median($upper)); */
+print(median($upper));
 
 fclose($_fp);
 ?>
