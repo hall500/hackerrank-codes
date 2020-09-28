@@ -1,3 +1,5 @@
+from collections import Counter
+
 def freqQuery(queries):
     freq = Counter()
 
