@@ -1,0 +1,108 @@
+#!/bin/python
+import os
+import sys
+
+sys.setrecursionlimit(15000)
+
+class Node:
+    def __init__(self, data):
+        self._data = data
+        self.left = -1
+        self.right = -1
+        self.depth = 0
+    
+    def __repr__(self):
+        return str(self.data) + "Node"
+
+class Tree:
+    def __init__(self, root):
+        self.root = root
+        self.result = []
+    
+    def tree_order(self, node):
+        if node == -1:
+            return
+        self.tree_order(node.left)
+        if node._data != -1:
+            self.result.append(node._data)
+        self.tree_order(node.right)
+    
+#
+# Complete the swapNodes function below.
+#
+def swapNodes(indexes, queries):
+    #
+    # Write your code here.
+    #
+    result = []
+    node_arr = []
+    depth_node_arr = {}
+    root = Node(1)
+    root.depth = 1
+    depth_node_arr[root.depth] = [root]
+    
+    tree = Tree(root)
+    node_arr.append(root)
+    
+    for i, nodes in enumerate(indexes):
+        cur_node = node_arr[i]
+        left = nodes[0]
+        right = nodes[1]
+        
+        if left != -1:
+            cur_node.left = Node(left)
+            cur_node.left.depth = cur_node.depth + 1
+            node_arr.append(cur_node.left)   
+            
+            if cur_node.left.depth in depth_node_arr.keys():
+                depth_node_arr[cur_node.left.depth].append(cur_node.left)
+            else:
+                depth_node_arr[cur_node.left.depth] = [cur_node.left]
+            
+        if right != -1:
+            cur_node.right = Node(right)
+            cur_node.right.depth = cur_node.depth + 1
+            node_arr.append(cur_node.right)
+            
+            if cur_node.right.depth in depth_node_arr.keys():
+                depth_node_arr[cur_node.right.depth].append(cur_node.right)
+            else:
+                depth_node_arr[cur_node.right.depth] = [cur_node.right]
+        
+    for query in queries:
+        for i, depth in enumerate(depth_node_arr):
+            if depth % query == 0 :
+                for node in depth_node_arr[depth]:
+                    temp = node.left
+                    node.right, node.left = temp, node.right
+                    
+        tree.tree_order(root)
+        result.append(tree.result)
+        tree.result = []
+    
+    return result
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input())
+
+    indexes = []
+
+    for _ in xrange(n):
+        indexes.append(map(int, raw_input().rstrip().split()))
+
+    queries_count = int(raw_input())
+
+    queries = []
+
+    for _ in xrange(queries_count):
+        queries_item = int(raw_input())
+        queries.append(queries_item)
+
+    result = swapNodes(indexes, queries)
+
+    fptr.write('\n'.join([' '.join(map(str, x)) for x in result]))
+    fptr.write('\n')
+
+    fptr.close()
