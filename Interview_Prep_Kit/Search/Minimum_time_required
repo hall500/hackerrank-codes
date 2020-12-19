@@ -1,0 +1,45 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the minTime function below.
+def minTime(machines, goal):
+    machines = sorted(machines)
+    num_machines = len(machines)
+    earliest_day = math.ceil(goal/num_machines)
+    
+    low = earliest_day * machines[0]
+    high = earliest_day * machines[-1]
+    
+    while low < high:
+        guess_day = (low + high) // 2
+        total = 0
+        for m in machines:
+            total += guess_day // m
+        if total >= goal:
+            high = guess_day
+        else:
+            low = guess_day + 1
+            
+    return int(low)
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nGoal = raw_input().split()
+
+    n = int(nGoal[0])
+
+    goal = int(nGoal[1])
+
+    machines = map(int, raw_input().rstrip().split())
+
+    ans = minTime(machines, goal)
+
+    fptr.write(str(ans) + '\n')
+
+    fptr.close()
