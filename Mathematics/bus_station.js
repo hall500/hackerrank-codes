@@ -22,13 +22,6 @@ function readLine() {
   return inputString[currentLine++];
 }
 
-/*
- * Complete the 'solve' function below.
- *
- * The function is expected to return an INTEGER_ARRAY.
- * The function accepts INTEGER_ARRAY a as parameter.
- */
-
 function solve(groups) {
   const totalPeople = groups.reduce((sum, group) => sum + group, 0);
   const maxGroupSize = Math.max(...groups);
