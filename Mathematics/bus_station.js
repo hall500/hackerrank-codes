@@ -86,3 +86,22 @@ function main() {
 
   ws.end();
 }
+
+
+/**
+ * Problem  Statement:
+ * 
+ * There are n groups of friends, and each group is numbered from 1 to n. The i-th group contains a^i people.
+
+ * They live near a bus stop, and only a single bus operates on this route. An empty bus arrives at the bus stop, and all the groups want to travel by the bus.
+
+ * However, a group of friends does not want to get separated. So they enter the bus only if the bus can carry the entire group.
+
+ * Moreover, the groups do not want to change their relative positioning while traveling. In other words, group 3 cannot travel by bus unless group 1 and group 2 have either (a) already traveled by the bus in the previous trip or (b) they are also sitting inside the bus at present.
+
+ * You are given that a bus of size x can carry x people simultaneously.
+
+ * Find the size x of the bus so that (1) the bus can transport all the groups and (2) every time when the bus starts from the bus station, there is no empty space in the bus (i.e., the total number of people present inside the bus is equal to x).
+
+ *
+ */
